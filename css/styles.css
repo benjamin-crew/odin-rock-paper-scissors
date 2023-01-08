@@ -1,0 +1,124 @@
+/* styles.css */
+
+:root {
+   --main-bg-color: #000000;
+   --secondary-bg-color: #282A3A;
+   --main-accent: #C69749;
+   --secondary-accent: #735F32;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Roboto";
+}
+
+.header {
+  display: flex;
+  background-color: var(--secondary-bg-color);
+  padding-top: 50px;
+  text-align: center;
+  justify-content: center;
+}
+
+.header h2 {
+  font-size: 48px;
+  color: #f9faf8;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -40px;
+  padding: 10px;
+  color: white;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--main-accent);
+  padding: 50px 400px;
+}
+
+.hero-left {
+  text-align: left;
+  margin-right: 50px;
+  width: 400px;
+}
+.hero-right img {
+  width: 400px;
+  height: 275px;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #f9faf8;
+}
+
+.hero-section p {
+  font-size: 18px;
+  color: #e5e7eb;
+}
+
+.hero-section button {
+  color: white;
+  background-color: #3882f6;
+  border: 1px solid #3882f6;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.game-section {
+  background-color: var(--secondary-accent);
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 100px 200px;
+}
+
+.game-section-text h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.game-section-content {
+  display: flex;
+  justify-content: center;
+  gap: 52px;
+}
+
+.game-section-content img {
+  width: 250px;
+  height: 175px;
+}
+
+.game-section-content button {
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.game-section-content .text {
+  width: 250px;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  padding: 20px 50px;
+  background-color: #1f2937;
+  font-size: 18px;
+  text-align: center;
+  color: #e5e7eb;
+}
