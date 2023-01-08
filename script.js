@@ -14,13 +14,13 @@ function getPlayerChoice() {
     // Function to get users choice and return it
     let playerChoice = undefined;
 
-    while (
-        playerChoice !== "rock" &&
-        playerChoice !== "paper" &&
-        playerChoice !== "scissors"
-    ) {
-        playerChoice = prompt("Choose rock, paper, scissors: ").toLowerCase();
-    }
+    // while (
+    //     playerChoice !== "rock" &&
+    //     playerChoice !== "paper" &&
+    //     playerChoice !== "scissors"
+    // ) {
+    //     playerChoice = prompt("Choose rock, paper, scissors: ").toLowerCase();
+    // }
 
     return playerChoice;
 }
@@ -89,14 +89,32 @@ function game(rounds) {
     }
 }
 
-// Get number of rounds to play
-let numberOfRounds;
+//Get number of rounds to play
+let numberOfRounds = 5;
 
-while (typeof numberOfRounds != "number") {
-    numberOfRounds = parseInt(
-        prompt("How many rounds would you like to play?: ")
-    );
-}
+// while (typeof numberOfRounds != "number") {
+//     numberOfRounds = parseInt(
+//         prompt("How many rounds would you like to play?: ")
+//     );
+// }
 
-// Start game
+// Button functions
+
+const rockButton = document.querySelector('.rock');
+rockButton.addEventListener('click', () => {
+    console.log("Rock");
+    
+});
+
+const paperButton = document.querySelector('.paper');
+paperButton.addEventListener('click', () => {
+    console.log("Paper");
+});
+
+const scissorsButton = document.querySelector('.scissors');
+scissorsButton.addEventListener('click', () => {
+    console.log("Scissors");
+});
+
+//Start game
 game(numberOfRounds);
