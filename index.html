@@ -21,26 +21,30 @@
              <h1>Click to play</h1>
          </div>
          <div class="hero-right">
-             <button>Play</button>
+             <button type="button" class="play">Play</button>
          </div>
       </div>
       <div class="game-section">
          <div class="game-section-text">
          </div>
          <div class="game-section-content">
-            <button type="button" class="rock">
+            <button type="button" id="rock" disabled>
                <img src="./img/noun-rock-88661.svg" alt="unsplash-img">
                <div class="text"></div>
             </button>
-            <button type="button" class="paper">
+            <button type="button" id="paper" disabled>
                <img src="./img/noun-paper-88662.svg" alt="unsplash-img">
                <div class="text"></div>
             </button>
-            <button type="button" class="scissors">
+            <button type="button" id="scissors" disabled>
                <img src="./img/noun-scissors-88666.svg" alt="unsplash-img">
                <div class="text"></div>
             </button>
          </div>
+      </div>
+      <div class="scores-section">
+          <p class="scores-section-status"></p>      
+          <p class="scores-section-scores"></p> 
       </div>
       <div class="footer">
          <a>The Odin Project 2023<a>

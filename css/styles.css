@@ -13,6 +13,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-family: "Roboto";
+  background-color: var(--main-bg-color);
 }
 
 .header {
@@ -108,6 +109,15 @@ body {
 .game-section-content .text {
   width: 250px;
   text-align: center;
+}
+
+.scores-section {
+    background-color: var(--secondary-bg-color);
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    text-align: center;
+    color: white;
 }
 
 .footer {

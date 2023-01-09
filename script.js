@@ -1,3 +1,20 @@
+function updateScore(winner = null) {
+    console.log(winner);
+    if (winner === null) {
+        console.log("creating scores")
+        var scores = [0, 0];
+        console.log("scores created")
+        console.log(scores)
+    } else if (winner === "user") {
+        scores[0]++;
+    } else {
+        scores[1]++;
+    }
+    console.log(scores);
+    console.log("returning");
+    return scores;
+}
+
 function getComputerChoice() {
     // Function to get computers choice and return it
     const choices = ["rock", "paper", "scissors"];
@@ -10,22 +27,11 @@ function getComputerChoice() {
     return choice;
 }
 
-function getPlayerChoice() {
-    // Function to get users choice and return it
-    let playerChoice = undefined;
+function playRound(user) {
 
-    // while (
-    //     playerChoice !== "rock" &&
-    //     playerChoice !== "paper" &&
-    //     playerChoice !== "scissors"
-    // ) {
-    //     playerChoice = prompt("Choose rock, paper, scissors: ").toLowerCase();
-    // }
+    // Get computer choice
+    const computer = getComputerChoice()
 
-    return playerChoice;
-}
-
-function playRound(user, computer, score) {
     // Function to output choices and evaluate them
 
     console.log("You choose: " + user);
@@ -39,7 +45,7 @@ function playRound(user, computer, score) {
             console.log("Computer wins! Paper beats rock!");
             ++score[1];
         } else if (computer === "scissors") {
-            console.log("You win! Rock beats scissors!");
+            console.log("You win! Rock beats scissors!")
             ++score[0];
         }
     } else if (user === "paper") {
@@ -63,58 +69,79 @@ function playRound(user, computer, score) {
 }
 
 function game(rounds) {
-    // Main game function
 
-    // Keep track of scores
-    let scores = [0, 0];
-
-    // Start game
-    for (let i = 0; i < rounds; i++) {
-        // Get choices
-        let playerChoice = getPlayerChoice();
-        let computerChoice = getComputerChoice();
-
-        // Play round
-        scores = playRound(playerChoice, computerChoice, scores);
+    // Check to see if game should end
+    if (rounds < 1) {
+        console.log("Game finished")
+        document.querySelector('.play').removeAttribute('disabled');
+        return;
     }
 
-    // Output the final scores
-    console.log("The final scores are: " + scores[0] + " " + scores[1]);
-    if (scores[0] > scores[1]) {
-        console.log("You win!");
-    } else if (scores[0] < scores[1]) {
-        console.log("The computer wins!");
+    // Disable the play button
+    document.querySelector('.play').setAttribute('disabled', 'true');
+
+
+    // Enable the buttons
+    document.getElementById("rock").removeAttribute('disabled');
+    document.getElementById("paper").removeAttribute('disabled');
+    document.getElementById("scissors").removeAttribute('disabled');
+
+    // Show Status
+    const statusContainer = document.querySelector('.scores-section-status');
+    if (rounds >= 0) {
+        statusContainer.innerText = `Rounds: ${rounds}`;
     } else {
-        console.log("It's a draw!");
+        statusContainer.innerText = 'Game has ended';
     }
+
+    // Show Scores
+    let displayScore = updateScore()
+    console.log("returned");
+    const scoresContainer = document.querySelector('.scores-section-scores');
+    scoresContainer.innerText = `User ${displayScore[0]} - ${displayScore[1]} Computer`;
+
+    //Placeholder variable to hold winner of each round
+    if (rounds === 5) {
+        let winner = undefined;
+    } else {
+        winner = undefined;
+    }
+
+    // Button functions
+    const rockButton = document.getElementById("rock");
+    rockButton.addEventListener('click', () => {
+        console.log("clicked");
+        winner = playRound("rock")
+        rounds--;
+
+        updateScore(winner)
+    });
+
+    const paperButton = document.getElementById("paper");
+    paperButton.addEventListener('click', () => {
+        winner = playRound("paper")
+        rounds--;
+
+        updateScore(winner)
+    });
+
+    const scissorsButton = document.getElementById("scissors");
+    scissorsButton.addEventListener('click', () => {
+        winner = playRound("scissors")
+        rounds--;
+
+        updateScore(winner)
+    });
 }
 
-//Get number of rounds to play
-let numberOfRounds = 5;
 
-// while (typeof numberOfRounds != "number") {
-//     numberOfRounds = parseInt(
-//         prompt("How many rounds would you like to play?: ")
-//     );
-// }
+// Start game when playButton is clicked
+const playButton = document.querySelector('.play');
+playButton.addEventListener('click', function () {
 
-// Button functions
+    //Get number of rounds to play
+    let numberOfRounds = 5;
 
-const rockButton = document.querySelector('.rock');
-rockButton.addEventListener('click', () => {
-    console.log("Rock");
-    
+    // Start game
+    game(numberOfRounds);
 });
-
-const paperButton = document.querySelector('.paper');
-paperButton.addEventListener('click', () => {
-    console.log("Paper");
-});
-
-const scissorsButton = document.querySelector('.scissors');
-scissorsButton.addEventListener('click', () => {
-    console.log("Scissors");
-});
-
-//Start game
-game(numberOfRounds);
