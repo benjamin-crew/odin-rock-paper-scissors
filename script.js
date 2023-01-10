@@ -1,17 +1,11 @@
-function updateScore(winner = null) {
-    console.log(winner);
-    if (winner === null) {
-        console.log("creating scores")
-        var scores = [0, 0];
-        console.log("scores created")
-        console.log(scores)
-    } else if (winner === "user") {
+function updateScore(winner) {
+    if (winner === "user") {
         scores[0]++;
-    } else {
+    } else if (winner === "computer") {
         scores[1]++;
+    } else {
+        console.log("tie")
     }
-    console.log(scores);
-    console.log("returning");
     return scores;
 }
 
@@ -33,115 +27,88 @@ function playRound(user) {
     const computer = getComputerChoice()
 
     // Function to output choices and evaluate them
-
     console.log("You choose: " + user);
     console.log("Computer chooses: " + computer);
 
     if (user === computer) {
         console.log("It's a tie!");
-        return score;
+        winner = null;
+        return winner;
     } else if (user === "rock") {
         if (computer === "paper") {
             console.log("Computer wins! Paper beats rock!");
-            ++score[1];
+            winner = "computer"
         } else if (computer === "scissors") {
             console.log("You win! Rock beats scissors!")
-            ++score[0];
+            winner = "user"
         }
     } else if (user === "paper") {
         if (computer === "rock") {
             console.log("You win! Paper beats rock!");
-            ++score[0];
+            winner = "user"
         } else if (computer === "scissors") {
             console.log("Computer wins! Scissors beats paper!");
-            ++score[1];
+            winner = "computer";
         }
     } else if (user === "scissors") {
         if (computer === "rock") {
             console.log("Computer wins! Rock beats scissors!");
-            ++score[1];
+            winner = "computer"
         } else if (computer === "paper") {
             console.log("You win! Scissors beats paper!");
-            ++score[0];
+            winner = "user"
         }
     }
-    return score;
+    return winner;
 }
 
-function game(rounds) {
-
-    // Check to see if game should end
-    if (rounds < 1) {
-        console.log("Game finished")
-        document.querySelector('.play').removeAttribute('disabled');
-        return;
-    }
-
-    // Disable the play button
-    document.querySelector('.play').setAttribute('disabled', 'true');
+function startRound(choice) {
 
 
-    // Enable the buttons
-    document.getElementById("rock").removeAttribute('disabled');
-    document.getElementById("paper").removeAttribute('disabled');
-    document.getElementById("scissors").removeAttribute('disabled');
-
-    // Show Status
-    const statusContainer = document.querySelector('.scores-section-status');
-    if (rounds >= 0) {
-        statusContainer.innerText = `Rounds: ${rounds}`;
-    } else {
+    if(numberOfRounds === 1){
         statusContainer.innerText = 'Game has ended';
-    }
-
-    // Show Scores
-    let displayScore = updateScore()
-    console.log("returned");
-    const scoresContainer = document.querySelector('.scores-section-scores');
-    scoresContainer.innerText = `User ${displayScore[0]} - ${displayScore[1]} Computer`;
-
-    //Placeholder variable to hold winner of each round
-    if (rounds === 5) {
-        let winner = undefined;
     } else {
-        winner = undefined;
+        winner = playRound(choice)
+        numberOfRounds--;
+        roundNumber++;
+
+        updateScore(winner)
+
+
+        statusContainer.innerText = `Rounds: ${roundNumber}/5`;
+        scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;   
     }
-
-    // Button functions
-    const rockButton = document.getElementById("rock");
-    rockButton.addEventListener('click', () => {
-        console.log("clicked");
-        winner = playRound("rock")
-        rounds--;
-
-        updateScore(winner)
-    });
-
-    const paperButton = document.getElementById("paper");
-    paperButton.addEventListener('click', () => {
-        winner = playRound("paper")
-        rounds--;
-
-        updateScore(winner)
-    });
-
-    const scissorsButton = document.getElementById("scissors");
-    scissorsButton.addEventListener('click', () => {
-        winner = playRound("scissors")
-        rounds--;
-
-        updateScore(winner)
-    });
 }
 
+// Set number of rounds to play globally
+let numberOfRounds = 5;
+let roundNumber = 1;
 
-// Start game when playButton is clicked
-const playButton = document.querySelector('.play');
-playButton.addEventListener('click', function () {
+// Set scores variable globally
+let scores = [0, 0];
 
-    //Get number of rounds to play
-    let numberOfRounds = 5;
+// Store winner of round
+let winner = null;
 
-    // Start game
-    game(numberOfRounds);
+// Show Status
+const statusContainer = document.querySelector('.scores-section-status');
+statusContainer.innerText = `Rounds: ${roundNumber}/5`;
+
+// Show Scores
+const scoresContainer = document.querySelector('.scores-section-scores');
+scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;   
+
+// Buttons and button actions
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
+
+rockButton.addEventListener('click', () => {
+    startRound("rock")
+});
+paperButton.addEventListener('click', () => {
+    startRound("paper")
+});
+scissorsButton.addEventListener('click', () => {
+    startRound("scissors")
 });
