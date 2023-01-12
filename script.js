@@ -3,69 +3,74 @@ function updateScore(winner) {
         scores[0]++;
     } else if (winner === "computer") {
         scores[1]++;
-    } else {
-        console.log("tie")
     }
     return scores;
 }
 
 function getComputerChoice() {
-    // Function to get computers choice and return it
     const choices = ["rock", "paper", "scissors"];
 
-    // get random index value
     const randomIndex = Math.floor(Math.random() * choices.length);
 
-    // get random item
     const choice = choices[randomIndex];
     return choice;
 }
 
 function playRound(user) {
+    const computer = getComputerChoice();
 
-    // Get computer choice
-    const computer = getComputerChoice()
+    // Output choices
+    const outputChoices = document.querySelector('.round-choices');
+    outputChoices.innerText = `You choose ${user}. Computer chooses ${computer}.`;
 
-    // Function to output choices and evaluate them
-    console.log("You choose: " + user);
-    console.log("Computer chooses: " + computer);
-
+    // Winning condition logic
     if (user === computer) {
-        console.log("It's a tie!");
         winner = null;
-        return winner;
     } else if (user === "rock") {
         if (computer === "paper") {
-            console.log("Computer wins! Paper beats rock!");
             winner = "computer"
         } else if (computer === "scissors") {
-            console.log("You win! Rock beats scissors!")
             winner = "user"
         }
     } else if (user === "paper") {
         if (computer === "rock") {
-            console.log("You win! Paper beats rock!");
             winner = "user"
         } else if (computer === "scissors") {
-            console.log("Computer wins! Scissors beats paper!");
             winner = "computer";
         }
     } else if (user === "scissors") {
         if (computer === "rock") {
-            console.log("Computer wins! Rock beats scissors!");
             winner = "computer"
         } else if (computer === "paper") {
-            console.log("You win! Scissors beats paper!");
             winner = "user"
         }
     }
+
+    // Output winner
+    const outputWinner = document.querySelector('.round-status');
+    if (winner === null) {
+        outputWinner.innerText = 'This round is a tie.';
+    } else {
+        outputWinner.innerText = `${winner} wins this round!`;
+    }
+
     return winner;
 }
 
 function startRound(choice) {
+    if (numberOfRounds === 1) {
+        const outputWinner = document.querySelector('.round-status');
+        if (scores[0] > scores[1]) {
+            outputWinner.innerText = `User wins the game! User ${scores[0]} - ${scores[1]} Computer`;
+        } else if (scores[0] < scores[1]) {
+            outputWinner.innerText = `Computer wins the game! User ${scores[0]} - ${scores[1]} Computer`;
+        } else {
+            outputWinner.innerText = 'The game ends in a tie!';
+        }
 
+        const removeChoices = document.querySelector('.round-choices');
+        removeChoices.remove();
 
-    if(numberOfRounds === 1){
         statusContainer.innerText = 'Game has ended';
     } else {
         winner = playRound(choice)
@@ -76,12 +81,13 @@ function startRound(choice) {
 
 
         statusContainer.innerText = `Rounds: ${roundNumber}/5`;
-        scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;   
+        scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;
     }
 }
 
 // Set number of rounds to play globally
 let numberOfRounds = 5;
+// Set round number to be incremented as game progresses
 let roundNumber = 1;
 
 // Set scores variable globally
@@ -96,7 +102,7 @@ statusContainer.innerText = `Rounds: ${roundNumber}/5`;
 
 // Show Scores
 const scoresContainer = document.querySelector('.scores-section-scores');
-scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;   
+scoresContainer.innerText = `User ${scores[0]} - ${scores[1]} Computer`;
 
 // Buttons and button actions
 const rockButton = document.getElementById("rock");

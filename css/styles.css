@@ -37,41 +37,42 @@ body {
   color: white;
 }
 
-/* .hero-section {
+.game-status-section {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   background-color: var(--main-accent);
-  padding: 50px 400px;
 }
 
-.hero-left {
-  text-align: left;
-  margin-right: 50px;
-  width: 400px;
-}
-.hero-right img {
-  width: 400px;
-  height: 275px;
+.game-status-middle {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  text-align: center;
+  color: white;
 }
 
-.hero-section h1 {
-  font-size: 48px;
+.game-status-section h1 {
+  font-size: 36px;
   font-weight: 800;
   color: #f9faf8;
 }
 
-.hero-section p {
+.game-status-section h3 {
+  font-size: 24px;
+  font-weight: 300;
+  color: #f9faf8;
+}
+
+.game-status-section p {
   font-size: 18px;
   color: #e5e7eb;
 }
 
-.hero-section button {
+.game-status-section button {
   color: white;
   background-color: #3882f6;
   border-radius: 5px;
   padding: 5px 10px;
-} */
+}
 
 .game-section {
   background-color: var(--secondary-accent);
